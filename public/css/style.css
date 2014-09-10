@@ -1,0 +1,153 @@
+::-moz-selection {
+  color: #eee;
+  background-color: #85aada;
+}
+
+::selection {
+  color: #eee;
+  background-color: #85aada;
+}
+
+a {
+  color: black;
+  text-decoration: none;
+}
+
+body {
+  background-color: #fbfbfb;
+}
+
+.noty {
+  display: none !important;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+* {
+  font-family: 'camingodos-web', sans-serif;
+  font-weight: 300;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+html,
+body,
+input,
+button,
+select,
+textarea,
+table,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'camingodos-web', sans-serif;
+  font-weight: 300;
+  color: #3e3d40;
+  font-size: 14px;
+  margin: 0;
+}
+
+h1,
+h2 {
+  font-family: 'camingodos-web', sans-serif;
+  font-weight: 200;
+  text-transform: uppercase;
+}
+
+h1 {
+  font-size: 32px;
+}
+
+h2 {
+  font-size: 35px;
+}
+
+h3 {
+  font-size: 28px;
+  font-weight: 200;
+}
+
+h4 {
+  text-align: center;
+  font-style: italic;
+  font-size: 20px;
+  margin: 30px 0 30px 0;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+ul li {
+  padding: 0;
+}
+
+#container,
+header .content {
+  max-width: 1600px;
+  min-width: 320px;
+  margin: auto;
+}
+
+@media (min-width: 1600px) {
+  #container,
+  header .content {
+    border-left: solid #d9dadb 1px;
+    border-right: solid #d9dadb 1px;
+  }
+}
+
+header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+header nav {
+  height: 40px;
+  background-color: rgba(255, 255, 255, 0.9);
+  text-align: center;
+}
+
+header nav li {
+  display: inline-block;
+  vertical-align: top;
+  height: 40px;
+  line-height: 38px;
+  padding: 0 10px;
+}
+
+#container {
+  overflow: hidden;
+  min-height: 100%;
+  margin-top: -40px;
+  padding: 40px 0 120px 0;
+}
+
+#container #main-title {
+  width: 100%;
+  height: 700px;
+  height: 54vw;
+  background: url("../img/main-img.jpg") 50% 40% no-repeat;
+  -webkit-background-size: 100%;
+  background-size: 100%;
+}
+
+#container #main-title #main-logo {
+  position: absolute;
+  top: 45vw;
+  left: 50%;
+  width: 500px;
+  height: 100px;
+  margin-left: -250px;
+  background: url("../img/main-logo.png") 50% 30% no-repeat;
+  -webkit-background-size: 100%;
+  background-size: 100%;
+}

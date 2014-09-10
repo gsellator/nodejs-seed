@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="fr">
+    <%- include partials/head.ejs %>
+    <body>
+
+        <section id="login">
+            <form class="logger" name="dailyform" action="login" method=POST>
+                <input type="text" required="" class="username" name="username" placeholder="Identifiant" autocomplete="on" spellcheck="false" autocorrect="off" autocapitalize="off" maxlength="1024">
+                <input type="password" required="" class="password" name="password" placeholder="Mot de passe" autocomplete="on" spellcheck="false" autocorrect="off" autocapitalize="off" maxlength="1024">
+                <button type="submit" class="btn" style="margin-top: 0;">Go!</button>
+            </form>
+        </section>
+
+    </body>
+</html>

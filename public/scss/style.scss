@@ -1,0 +1,119 @@
+$daily-grey-0: #FBFBFB;
+$daily-grey-1: #F7F7F7;
+$daily-grey-2: #f1f1f1;
+$daily-grey-3: #e6e5e5;
+$daily-grey-4: #D9DADB;
+$daily-grey-5: #c9c9c9;
+$daily-grey-6: #b1b1b1;
+$daily-medium-grey: #5f5f5f;
+$daily-dark-grey: #3E3D40;
+$cal-color: #C12943;
+$daily-fluo-blue: #009ADB;
+$daily-ultralight-blue: #f5f7fa;
+$daily-light-blue: #E7ECF5;
+$daily-medium-blue: #B8CDE6;
+$daily-dark-blue: #85AADA;
+$break-xsmall: 380px;
+$break-small: 500px;
+$break-medium: 820px;
+$break-large: 950px;
+$break-xlarge: 1600px;
+
+
+::selection {color: #eee; background-color: $daily-dark-blue;}
+a {color: black; text-decoration: none;}
+body{background-color: $daily-grey-0;}
+.noty{display: none !important;}
+html, body{ height: 100%; }
+
+*{
+    font-family: 'camingodos-web', sans-serif;
+    font-weight: 300;
+    box-sizing: border-box;    
+}
+
+html, body, input, button, select, textarea, table, h3, h4, h5, h6 {
+    font-family: 'camingodos-web', sans-serif;
+    font-weight: 300;
+    color: $daily-dark-grey;
+    font-size: 14px;
+    margin: 0;
+}
+
+h1, h2{
+    font-family: 'camingodos-web', sans-serif;
+    font-weight: 200;
+    text-transform: uppercase;
+}
+h1{font-size: 32px;}
+h2{font-size: 35px;}
+h3{font-size: 28px;font-weight: 200;}
+
+h4{
+    text-align: center;
+    font-style: italic;
+    font-size: 20px;
+    margin: 30px 0 30px 0;
+}
+
+ul{
+    list-style: none;
+    margin: 0; padding: 0;
+    li{padding: 0;}
+}
+
+#container, header .content{
+    max-width: $break-xlarge;
+    min-width: 320px;
+    margin: auto;
+    @media (min-width: $break-xlarge){ border-left: solid $daily-grey-4 1px; border-right: solid $daily-grey-4 1px;}
+}
+
+header{
+    position: fixed;
+    top: 0;
+    width: 100%;
+
+    nav{
+        height: 40px;
+        background-color: rgba(255, 255, 255, 0.9);
+        text-align: center;
+
+        li{
+            display: inline-block;
+            vertical-align: top;
+            height: 40px;
+            line-height: 38px;
+            padding: 0 10px;
+        }
+    }
+}
+
+#container{
+    overflow: hidden;
+    min-height: 100%;
+    margin-top: -40px;
+    padding: 40px 0 120px 0;
+
+    #main-title{
+        width: 100%;
+        height: 700px;
+        height: 54vw;
+        background: url("../img/main-img.jpg") 50% 40% no-repeat;
+        background-size: 100%;
+
+        #main-logo{
+            position: absolute;
+            top: 45vw;
+            left: 50%;
+            width: 500px;
+            height: 100px;
+            margin-left: -250px;
+            background: url("../img/main-logo.png") 50% 30% no-repeat;
+            background-size: 100%;
+        }
+    }
+}
+
+
+

@@ -1,0 +1,4 @@
+pkg
+*.DS_Store
+node_modules
+public/js/bower_components
