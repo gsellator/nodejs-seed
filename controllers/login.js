@@ -1,7 +1,6 @@
 module.exports = {
     get: function(req, res) {
         if (req.param('error')==1) {
-            // Todo : show an error message
             res.render('login.ejs');
         } else {
             res.render('login.ejs');
@@ -11,7 +10,7 @@ module.exports = {
     post: function(req, res) {
         if (req.body.username == 'a' && req.body.password == 'b') {
             res.writeHead(302, {
-                'Set-Cookie': 'access_token=OWgwMDo5aDAwYmlnc2VjcmV0',
+                'Set-Cookie': 'access_token=aaa',
                 'Content-Type': 'text/plain',
                 'Location': '/admin'
             });
