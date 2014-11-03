@@ -1,11 +1,12 @@
-var express = require('express'),
-    mongoose = require('mongoose')
-model = require('./models/model'),
-    auth = require('./helpers/auth');
+var config = require('./config/config'),
+    express = require('express'),
+    mongoose = require('mongoose');
 
 var homeCtrl = require('./controllers/home'),
     loginCtrl = require('./controllers/login'),
-    adminCtrl = require('./controllers/admin');
+    adminCtrl = require('./controllers/admin'),
+    model = require('./models/model'),
+    auth = require('./helpers/auth');
 
 // Config
 var bddUri = 'mongodb://localhost/amecourt';
@@ -31,13 +32,13 @@ app.use(express.bodyParser());
 //Helpers
 var padStr = function(i) {
     return (i < 10) ? "0" + i : "" + i;
-}
+};
 
 app.locals.dateToDDMMYYYY = function(dte) {
     if (dte == null)
         return "-";
     return padStr(dte.getDate()) + '/' + padStr(1 + dte.getMonth()) + '/' + padStr(dte.getFullYear());
-}
+};
 
 // Routes
 app.get('/', function(req, res) {
@@ -62,8 +63,8 @@ app.get('/logout', function(req, res) {
 });
 
 app.use(function(req, res, next){
-    res.setHeader('Content-Type', 'text/plain');
-    res.send(404, 'Page introuvable !');
+    res.redirect('/');
 });
 
-app.listen(3100, function(){console.log('Express server listening on port 3100');});
+app.listen(config.port);
+console.log('app running on port ' + config.port);

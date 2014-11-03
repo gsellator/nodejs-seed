@@ -1,6 +1,0 @@
-{
-  "prod": {
-    "username": "project-prod",
-    "password": "passwd"
-  }
-}
