@@ -2,7 +2,8 @@ var config = require('./config/config'),
     express = require('express'),
     mongoose = require('mongoose');
 
-var homeCtrl = require('./controllers/home'),
+var initializer = require('./helpers/initializer'),
+    homeCtrl = require('./controllers/home'),
     loginCtrl = require('./controllers/login'),
     adminCtrl = require('./controllers/admin'),
     model = require('./models/model'),
@@ -25,7 +26,7 @@ var app = express();
 app.set('view engine', 'ejs');
 app.use(express.static(__dirname + '/public'));
 app.use(express.bodyParser());
-
+initializer.start(app);
 
 
 // EJS Helpers
