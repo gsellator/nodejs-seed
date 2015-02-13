@@ -139,7 +139,7 @@ module.exports = function(grunt) {
 
   // Dev tasks
   grunt.loadNpmTasks("grunt-concurrent");
-  grunt.loadNpmTasks('grunt-contrib-sass');
+  grunt.loadNpmTasks('grunt-sass');
   grunt.loadNpmTasks('grunt-nodemon');
   grunt.loadNpmTasks('grunt-contrib-watch');
 

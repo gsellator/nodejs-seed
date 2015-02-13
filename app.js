@@ -59,5 +59,4 @@ app.use(function(req, res, next){
   res.redirect('/');
 });
 
-app.listen(config.port);
 console.log('app running on port ' + config.port);
