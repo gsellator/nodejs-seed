@@ -1,86 +1,156 @@
 module.exports = function(grunt) {
+  require('time-grunt')(grunt);``
 
-    grunt.initConfig({
+  grunt.initConfig({
+    // Dev tasks
+    concurrent: {
+      dev: ["nodemon", "watch"],
+      options: {
+        logConcurrentOutput: true
+      }
+    },
 
-        pkg: grunt.file.readJSON('package.json'),
-
-        clean: ["pkg/"],
-
-        env : {
-            dev: {
-                NODE_ENV : 'DEVELOPMENT'
-            },
-            pre : {
-                NODE_ENV : 'PREPRODUCTION'
-            },
-            prod : {
-                NODE_ENV : 'PRODUCTION'
-            }
+    sass: {
+      dev: {
+        options: {
+          sourcemap: true,
+          update: true
         },
-
-        bump: {
-            options: {
-                commit: false,
-                createTag: false,
-                push: false
-            }
+        files: [{
+          expand: true,
+          cwd: 'public/scss/',
+          src: ['*.scss'],
+          dest: 'public/css',
+          ext: '.css'
+        }]
+      },
+      prod: {
+        options: {
+          style: 'compressed'
         },
+        files: [{
+          expand: true,
+          cwd: 'public/scss/',
+          src: ['*.scss'],
+          dest: 'pkg/public/css',
+          ext: '.css'
+        }]
+      }
+    },
 
-        copy: {
-            main: {
-                files: [
-                    {src: [
-                        '.ftppass',
-                        'app.js',
-                        'config/**',
-                        'controllers/**',
-                        'helpers/**',
-                        'models/**',
-                        'package.json',
-                        'public/favicon.ico',
-                        'public/favicon.png',
-                        'public/css/**',
-                        'public/img/**',
-                        'public/js/**',
-                        'public/tmp/**',
-                        'sh/**',
-                        'templates/**',
-                        'views/**'
-                    ], dest: 'pkg/'}
-                ]
-            }
+    nodemon: {
+      dev: {
+        script: 'app.js',
+        options: {
+          env: {
+            "NODE_ENV": 'dev'
+          },
+          watch: ['app.js', 'server'],
+          delay: 300,
+
+          callback: function (nodemon) {
+            // Log nodemon actions
+            nodemon.on('log', function (event) {console.log(event.colour);});
+
+            // Open the application in a new browser window and is optional
+            //            nodemon.on('config:update', function () {setTimeout(function() {require('open')('http://localhost:3090', 'Google Chrome Canary');}, 1000);});
+
+            // Update .rebooted to fire Live-Reload
+            nodemon.on('restart', function () {setTimeout(function() {
+              require('fs').writeFileSync('.rebooted', 'rebooted');
+            }, 1000);});
+          }
+        }
+      }
+    },
+
+    watch: {
+      scss: {
+        files: ['public/scss/**/*.scss'],
+        tasks: ['sass:dev']
+      },
+      livereload: {
+        files: ['public/js/**/*.js', 'public/css/*.css'],
+        options: {
+          livereload: 35730
+        }
+      }
+    },
+
+    // Build tasks
+    pkg: grunt.file.readJSON('package.json'),
+
+    clean: {
+      css: ["public/css/*"],
+      pkg: ["pkg/"],
+    },
+
+    bump: {
+      options: {
+        commit: false,
+        createTag: false,
+        push: false
+      }
+    },
+
+    copy: {
+      main: {
+        files: [
+          {src: [
+            '.bowerrc',
+            'app.js',
+            'bower.json',
+            'config/**',
+            'controllers/**',
+            'helpers/**',
+            'package.json',
+            'public/**',
+            'sh/**',
+            'views/**'
+          ], dest: 'pkg/'}
+        ]
+      }
+    },
+
+    imagemin: {
+      full: {
+        files: [{
+          expand: true,
+          cwd: 'public/',
+          src: ['img/**/*.{png,jpg,gif}'],
+          dest: 'pkg/public/'
+        }]
+      }
+    },
+
+    'sftp-deploy': {
+      prod: {
+        auth: {
+          host: 'delirium.cloudapp.net',
+          port: 22,
+          authKey: 'prod'
         },
+        src: 'pkg',
+        dest: '/home/project/project',
+        server_sep: '/'
+      }
+    }
+  });
 
-        'sftp-deploy': {
-            pre: {
-                auth: {
-                    host: 'delirium.cloudapp.net',
-                    port: 22,
-                    authKey: 'pre'
-                },
-                src: 'pkg',
-                dest: '/home/Hub-pre/Hub',
-                server_sep: '/'
-            },
-            prod: {
-                auth: {
-                    host: 'delirium.cloudapp.net',
-                    port: 22,
-                    authKey: 'prod'
-                },
-                src: 'pkg',
-                dest: '/home/Hub-prod/Hub',
-                server_sep: '/'
-            }
-        },
-    });
+  // Dev tasks
+  grunt.loadNpmTasks("grunt-concurrent");
+  grunt.loadNpmTasks('grunt-contrib-sass');
+  grunt.loadNpmTasks('grunt-nodemon');
+  grunt.loadNpmTasks('grunt-contrib-watch');
 
-    grunt.loadNpmTasks('grunt-contrib-clean');
-    grunt.loadNpmTasks('grunt-env');
-    grunt.loadNpmTasks('grunt-bump');
-    grunt.loadNpmTasks('grunt-contrib-copy');
-    grunt.loadNpmTasks('grunt-sftp-deploy');
+  grunt.registerTask('default', ["clean:css", "sass:dev", 'concurrent']);
 
-    grunt.registerTask('pre', ['env:pre', 'clean', 'bump', 'copy', 'sftp-deploy:pre']);
-    grunt.registerTask('prod', ['env:prod', 'clean', 'bump', 'copy', 'sftp-deploy:prod']);
+  // Build tasks
+  grunt.loadNpmTasks('grunt-contrib-clean');
+  grunt.loadNpmTasks('grunt-bump');
+  grunt.loadNpmTasks('grunt-contrib-copy');
+  grunt.loadNpmTasks('grunt-contrib-imagemin');
+  grunt.loadNpmTasks('grunt-sftp-deploy');
+
+  grunt.registerTask('prod', ['clean:pkg', 'sass:prod', 'copy:main', 'imagemin:full', 'sftp-deploy', 'bump']);
 };
