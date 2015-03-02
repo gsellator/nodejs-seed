@@ -1,5 +1,5 @@
 module.exports = function(grunt) {
-  require('time-grunt')(grunt);``
+  require('time-grunt')(grunt);
 
   grunt.initConfig({
     // Dev tasks

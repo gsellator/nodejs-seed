@@ -1,6 +1,10 @@
 var pjson = require('./package.json'),
     config = require('./config/config'),
     bddUri = config.bddUri,
+    adminCtrl = require('./controllers/admin'),
+    homeCtrl = require('./controllers/home'),
+    loginCtrl = require('./controllers/login'),
+    auth = require('./helpers/auth'),
     initializer = require('./helpers/initializer');
 
 var express = require('express'),
@@ -11,6 +15,11 @@ var express = require('express'),
 
 var app = express(),
     server = app.listen(config.port);
+
+var homeCtrl = require('./helpers/initializer'),
+    auth = require('./helpers/initializer'),
+    adminCtrl = require('./helpers/initializer'),
+    loginCtrl = require('./helpers/initializer');
 
 mongoose.connect(bddUri, function (err, res) {
   if (err) {console.log ('Mongo error:' + bddUri + '. ' + err);} 
