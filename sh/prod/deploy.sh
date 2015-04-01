@@ -1,11 +1,11 @@
 #!/bin/zsh
 
 # set user variables
-PATH='~/.nvm/v0.10.36/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/local/bin:/opt/X11/bin:/usr/local/git/bin'
+PATH='/Users/adriengsell/.nvm/v0.10.36/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/local/bin:/opt/X11/bin:/usr/local/git/bin'
 SOURCEFOLDER='Sources'
 USR='project'
 VERSION='prod'
-SERVER='leka.cloudapp.net'
+SERVER='delirium.cloudapp.net'
 
 # Deploy sources
 cd ~/$SOURCEFOLDER/$USR
