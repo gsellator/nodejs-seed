@@ -16,11 +16,6 @@ var express = require('express'),
 var app = express(),
     server = app.listen(config.port);
 
-var homeCtrl = require('./helpers/initializer'),
-    auth = require('./helpers/initializer'),
-    adminCtrl = require('./helpers/initializer'),
-    loginCtrl = require('./helpers/initializer');
-
 mongoose.connect(bddUri, function (err, res) {
   if (err) {console.log ('Mongo error:' + bddUri + '. ' + err);} 
   else {console.log ('Mongo success: ' + bddUri);}
@@ -57,7 +52,7 @@ app.post('/login', loginCtrl.post);
 
 app.get('/logout', function(req, res) {
   res.writeHead(302, {
-    'Set-Cookie': 'access_token=""',
+    'Set-Cookie': 'access_token=',
     'Content-Type': 'text/plain',
     'Location': '/'
   });

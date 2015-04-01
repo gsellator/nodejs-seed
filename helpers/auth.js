@@ -20,7 +20,7 @@ module.exports = {
             next();
         } else {
             res.writeHead(302, {
-                'Set-Cookie': 'access_token=""',
+                'Set-Cookie': 'access_token=',
                 'Content-Type': 'text/plain',
                 'Location': '/login'
             });
